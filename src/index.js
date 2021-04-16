@@ -12,6 +12,8 @@ const server = http.createServer(app).listen(PORT, () => {
   console.log('server running...');
 });
 
+
+app.use(express.json());
 app.use('/public/images', express.static('/public'));
 
 app.get('/ping', ping);
