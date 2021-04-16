@@ -1,2 +1,2 @@
-export const INSERT_USER = 'INSERT INTO users ( user_id, unique_name, user_name, user_image, password, profile ) VALUES ( ?, ?, ?, ?, ?, ? );';
+export const INSERT_USER = 'INSERT INTO users ( unique_name, user_name, user_image, password, profile ) VALUES ( ?, ?, ?, ?, ?, ? );';
 export const SELECT_USER_BY_ID = 'SELECT user_id, user_image, unique_name, user_name, profile, created_at FROM users WHERE user_id = ?;';
