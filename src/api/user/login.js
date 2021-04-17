@@ -13,10 +13,9 @@ export default async (req, res, next) => {
     const hashed_password = await hash.pbkdf2Sync(password, process.env.HASH_SALT_KEY, 1024, 64, 'sha512').toString('hex');
     const value = [ unique_name, hashed_password ];
 
-    const [[ result ]] = await database.query(LOGIN_ACCOUNT, value);
-    const user_id = result.user_id;
+    const [[ result ]] = await database.query(LOGIN_ACCOUNT, value); 
 
-    req.user_id = user_id;
+    req.user_id = result.user_id;
     res.data = { ...res.data, result };
     next();
   } catch(err) {

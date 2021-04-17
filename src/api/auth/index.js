@@ -1,2 +1,4 @@
-export { default as AuthSign } from './sign';
-export { default as AuthVerify } from './verify';
+export { default as SignToken } from './signToken';
+export { default as VerifyToken } from './verifyToken';
+export { default as SignRefresh } from './signRefresh';
+export { default as VerifyRefresh } from './verifyRefresh';
