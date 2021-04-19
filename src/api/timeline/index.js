@@ -1,1 +1,1 @@
-export { default as GetTimeline } from './timeline';
+export { default as GetTimeline } from './get';

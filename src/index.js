@@ -3,13 +3,14 @@ import http from 'http';
 import cookieParser from 'cookie-parser';
 import socketIO from 'socket.io';
 import { SignToken, VerifyToken, SignRefresh, VerifyRefresh } from './api/auth/index';
-import { GetUser, SignUser, LoginUser, DelUser } from './api/user/index';
+import { GetUser, SignUser, LoginUser, DelUser, EditUser } from './api/user/index';
 import { GetFollows, PostFollow, DelFollow } from './api/follow/index';
 import { GetTweets, PostTweet, DelTweet } from './api/tweet/index';
 import { GetReplys, PostReply, DelReply } from './api/reply/index';
 import { PostRetweet, DelRetweet } from './api/retweet/index';
 import { PostHeart, DelHeart } from './api/heart/index';
 import { GetTimeline } from './api/timeline/index';
+import { SocketAuthorization, SocketLogin, CreateRoom, LeaveRoom, SendMessage } from './socket/index';
 import morgan from 'morgan';
 import multer from 'multer';
 
@@ -29,19 +30,25 @@ app.use(express.json());
 app.use(morgan('common'));
 app.use('/public/images', express.static('/public'));
 
+app.post('/ping', getImage, (req, res) => {
+  const { form_text, data } = req.body;
+  const { user_image } = req.file;
+  console.log(user_image, form_text, data);
+  res.send('hello!');
+})
 app.post('/refresh', VerifyRefresh, SignToken);
-app.post('/sign-up', getImage, SignUser, SignToken, SignRefresh, GetUser);
-app.post('/login', LoginUser, SignToken, SignRefresh, GetUser, GetFollows);
-app.delete('/logout', VerifyToken);
-app.delete('/unsign', VerifyToken, DelUser);
+app.post('/user/sign', getImage, SignUser, LoginUser, GetFollows, SignToken, SignRefresh);
+app.post('/login', LoginUser, GetFollows, SignToken, SignRefresh);
+app.put('/user/edit', VerifyToken, getImage, EditUser, GetUser);
+app.delete('/user/unsign', LoginUser, DelUser);
 
 app.post('/tweet/post', VerifyToken, getImage, PostTweet, PostReply);
 app.post('/retweet/post', VerifyToken, PostRetweet);
 app.post('/heart/post', VerifyToken, PostHeart);
 
-app.delete('/tweet/delete', VerifyToken, DelTweet, DelReply);
-app.delete('/retweet/delete', VerifyToken, DelRetweet);
-app.delete('/heart/delete', VerifyToken, DelHeart);
+app.delete('/tweet/del', VerifyToken, DelTweet, DelReply);
+app.delete('/retweet/del', VerifyToken, DelRetweet);
+app.delete('/heart/del', VerifyToken, DelHeart);
 
 app.get('/timeline', VerifyToken, GetTimeline);
 app.get('/profile', GetUser, GetTweets);
@@ -50,7 +57,7 @@ app.get('/message', VerifyToken);
 app.get('/search', GetTweets);
 
 app.post('/follow/post', VerifyToken, PostFollow);
-app.delete('/follow/delete', VerifyToken, DelFollow);
+app.delete('/follow/del', VerifyToken, DelFollow);
 
 app.use((req, res) => {
   res.json(res.data);
@@ -59,12 +66,17 @@ app.use((err, req, res, next) => {
   console.log(err);
   res.status(400).send({code: err.code, message: err.message});
 });
-/* 
-const io = socketIO(server, {
 
-})
+const io = socketIO(server);
+
+io.use(SocketAuthorization);
 
 io.on('connection', socket => {
-  socket.on();
-  socket.on();
-}); */
+  socket.leave(socket.id); //초기 개인룸 삭제
+  socket.join(socket.user_id); //고유 아이디로 재접속
+
+  socket.on('login', () => SocketLogin(socket));
+  socket.on('create room', (req, res) => CreateRoom(socket, req, res));
+  socket.on('send message', (req, res) => SendMessage(socket, req, res));
+  socket.on('leave room', (req, res) => LeaveRoom(socket, req, res));
+});
