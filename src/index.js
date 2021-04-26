@@ -23,26 +23,19 @@ const server = http.createServer(app).listen(PORT, () => {
 const upload = multer({
   dest : 'public/images'
 });
-const getImage = upload.single('imageFile');
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan('common'));
 app.use('/public/images', express.static('/public'));
 
-app.post('/ping', getImage, (req, res) => {
-  const { form_text, data } = req.body;
-  const { user_image } = req.file;
-  console.log(user_image, form_text, data);
-  res.send('hello!');
-})
 app.post('/refresh', VerifyRefresh, SignToken);
-app.post('/user/sign', getImage, SignUser, LoginUser, GetFollows, SignToken, SignRefresh);
+app.post('/user/sign', upload.single('user_image'), SignUser, LoginUser, GetFollows, SignToken, SignRefresh);
 app.post('/login', LoginUser, GetFollows, SignToken, SignRefresh);
-app.put('/user/edit', VerifyToken, getImage, EditUser, GetUser);
+app.put('/user/edit', VerifyToken, upload.single('user_image'), EditUser, GetUser);
 app.delete('/user/unsign', LoginUser, DelUser);
 
-app.post('/tweet/post', VerifyToken, getImage, PostTweet, PostReply);
+app.post('/tweet/post', VerifyToken, upload.single('tweet_image'), PostTweet, PostReply);
 app.post('/retweet/post', VerifyToken, PostRetweet);
 app.post('/heart/post', VerifyToken, PostHeart);
 
@@ -67,7 +60,7 @@ app.use((err, req, res, next) => {
   res.status(400).send({code: err.code, message: err.message});
 });
 
-const io = socketIO(server);
+const io = socketIO(server);/* 
 
 io.use(SocketAuthorization);
 
@@ -79,4 +72,4 @@ io.on('connection', socket => {
   socket.on('create room', (req, res) => CreateRoom(socket, req, res));
   socket.on('send message', (req, res) => SendMessage(socket, req, res));
   socket.on('leave room', (req, res) => LeaveRoom(socket, req, res));
-});
+}); */
