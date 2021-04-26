@@ -29,6 +29,7 @@ app.use(express.json());
 app.use(morgan('common'));
 app.use('/public/images', express.static('/public'));
 
+app.get('/ping', (req, res) => { res.send('pong')});
 app.post('/refresh', VerifyRefresh, SignToken);
 app.post('/user/sign', upload.single('user_image'), SignUser, LoginUser, GetFollows, SignToken, SignRefresh);
 app.post('/login', LoginUser, GetFollows, SignToken, SignRefresh);
