@@ -5,6 +5,10 @@ import { INSERT_USER_ACCOUNT } from '../../db/query';
 export default async (req, res, next) => {
   try {
     const { unique_name, user_name, password, profile } = req.body;
+    if (req.files) {
+      //tweet_image = req.files.filename;
+      console.log(req.files);
+    }; 
 
     if (!(4 < unique_name.length && unique_name.length < 12)) 
       throw {code: 'ER_INVAILD_UNIQUE_NAME', message: 'ID must be at least 4 letters and no more than 12 letters.'};
