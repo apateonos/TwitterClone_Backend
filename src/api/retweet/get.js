@@ -13,6 +13,7 @@ export default async (req, res, next) => {
     else if (tweet_id) {
       const value = [ tweet_id ];
       const [ retweets ] = await database.query(SELECT_TWEET_HEARTS, value); 
+      console.log(retweets);
       res.data = { ...res.data, retweets };
     }
    
