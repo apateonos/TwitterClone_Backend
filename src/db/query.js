@@ -17,10 +17,10 @@ export const DELETE_REPLY = 'DELETE FROM replys WHERE tweet_id = ? AND reply_id 
 export const INSERT_RETWEET = 'INSERT INTO retweet ( user_id, tweet_id ) VALUES ( ?, ? );';
 export const DELETE_RETWEET = 'DELETE FROM retweet WHERE user_id = ? AND tweet_id = ?;';
 
-export const SELECT_FOLLOWERS = 'SELECT u.user_id, u.user_name, u.unique_name, u.user_image, u.profile FROM users u LEFT JOIN follows f ON f.user_id = u.user_id WHERE f.follower_id = ?;';
-export const SELECT_FOLLOWINGS = 'SELECT u.user_id, u.user_name, u.unique_name, u.user_image, u.profile FROM users u LEFT JOIN follows f ON f.follower_id = u.user_id WHERE f.user_id = ?;';
-export const INSERT_FOLLOW = 'INSERT INTO follows ( user_id, follower_id ) VALUES ( ?, ? );';
-export const DELETE_FOLLOW = 'DELETE FROM follows WHERE user_id = ? AND follower_id = ?;';
+export const SELECT_FOLLOWERS = 'SELECT u.user_id, u.user_name, u.unique_name, u.user_image, u.profile FROM users u LEFT JOIN follows f ON f.user_id = u.user_id WHERE f.following_id = ?;';
+export const SELECT_FOLLOWINGS = 'SELECT u.user_id, u.user_name, u.unique_name, u.user_image, u.profile FROM users u LEFT JOIN follows f ON f.following_id = u.user_id WHERE f.user_id = ?;';
+export const INSERT_FOLLOW = 'INSERT INTO follows ( user_id, following_id ) VALUES ( ?, ? );';
+export const DELETE_FOLLOW = 'DELETE FROM follows WHERE user_id = ? AND following_id = ?;';
 
 export const SELECT_USER_TWEET_IMAGES = 'SELECT tweet_image from tweets WHERE user_id = ?;';
 
