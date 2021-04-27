@@ -3,7 +3,7 @@ export const LOGIN_USER_ACCOUNT = 'SELECT user_id, user_image, unique_name, user
 export const EDIT_USER_ACCOUNT = 'UPDATE users SET unique_name, user_name, user_image, profile WHERE user_id = ?;';
 export const CHANGE_USER_PASSWORD = 'UPDATE users SET password WHERE user_id = ? AND password = ?;';
 export const SELECT_USER_INFORMATION = 'SELECT user_id, unique_name, user_name, user_image, profile FROM users WHERE unique_name = ?;';
-export const SELECT_TIMELINE = 'SELECT t.*, u.user_image, u.user_name, u.unique_name FROM tweets t LEFT JOIN users u ON u.user_id = t.user_id LEFT JOIN retweet rt ON t.tweet_id = rt.tweet_id LEFT JOIN follows f ON f.following_id = t.user_id OR f.following_id = rt.user_id WHERE t.user_id = ? OR f.user_id = ? OR rt.user_id = ';
+export const SELECT_TIMELINE = 'SELECT t.*, u.user_image, u.user_name, u.unique_name FROM tweets t LEFT JOIN users u ON u.user_id = t.user_id LEFT JOIN retweet rt ON t.tweet_id = rt.tweet_id LEFT JOIN follows f ON f.following_id = t.user_id OR f.following_id = rt.user_id WHERE t.user_id = ? OR f.user_id = ? OR rt.user_id = ?';
 
 export const SELECT_USER_TWEETS = 'SELECT t.*, u.user_image, u.user_name, u.unique_name FROM tweets t LEFT JOIN users u ON u.user_id = t.user_id LEFT JOIN retweets rt ON rt.tweet_id = t.tweet_id WHERE t.user_id = ? OR rt.user_id = ?;';
 export const SELECT_TWEET = 'SELECT t.*, u.user_image, u.user_name, u.unique_name FROM tweets t LEFT JOIN users u ON u.user_id = t.user_id WHERE t.tweet_id = ?;';
