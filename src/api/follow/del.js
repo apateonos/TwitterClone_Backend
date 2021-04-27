@@ -1,5 +1,5 @@
 import { database } from '../../db/mysql';
-import { DELETE_FOLLOW } from '../../db/query';
+import { DELETE_FOLLOW, SELECT_FOLLOWINGS } from '../../db/query';
 
 export default async (req, res, next) => {
   try {
@@ -8,9 +8,10 @@ export default async (req, res, next) => {
     if (typeof following_id !== 'number') throw {code: 'ER_INVAILD_TARGET', message: 'invaild request'};
         
     const value = [ user_id, following_id ];
-    const [ result ] = await database.query(DELETE_FOLLOW, value);
+    await database.query(DELETE_FOLLOW, value);
+    const [ follows ] = await database.query(SELECT_FOLLOWINGS, value);
 
-    res.data = { ...res.data, result };
+    res.data = { ...res.data, follows };
     next(); 
   } catch (err) {
     next(err);

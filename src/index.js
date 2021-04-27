@@ -34,6 +34,7 @@ app.use(express.json());
 app.use(morgan('common'));
 app.use('/public/images', express.static('/public'));
 
+app.get('/ping', (req, res) => {console.log(req.body)});
 app.post('/refresh', VerifyRefresh, SignToken);
 app.post('/user/sign', upload.single('imageFile'), SignUser, LoginUser, GetRetweet, GetHeart, GetFollows, SignToken, SignRefresh);
 app.post('/login', LoginUser, GetFollows, GetRetweet, GetHeart, SignToken, SignRefresh);
