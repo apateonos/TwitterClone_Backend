@@ -33,10 +33,8 @@ export default async (req, res, next) => {
   
     const hashed_password = await hash.pbkdf2Sync(password, process.env.HASH_SALT_KEY, 1024, 64, 'sha512').toString('hex');
     const value = [ unique_name, user_name, user_image, hashed_password, profile ];
-    const [[ result ]] = await database.query(INSERT_USER_ACCOUNT, value);
+    const [ result ] = await database.query(INSERT_USER_ACCOUNT, value);
     console.log(result);
-    if (result.statusCode !== 2) throw {code: 'ER_SIGN_ACCOUNT', message: 'request could not be completed.'};
-  
     next();
   } catch(err) {
     next(err);

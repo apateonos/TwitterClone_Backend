@@ -7,6 +7,7 @@ export default async (req, res, next) => {
 
     const value = [ user_id, user_id, user_id ];
     const [ timeline ] = await database.query(SELECT_TIMELINE, value);
+    
     res.data = { ...res.data, timeline };
     next();
   } catch (err) {
