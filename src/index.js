@@ -13,6 +13,7 @@ import { GetTimeline } from './api/timeline/index';
 import { SocketAuthorization, SocketLogin, CreateRoom, LeaveRoom, SendMessage } from './socket/index';
 import morgan from 'morgan';
 import multer from 'multer';
+import cors from 'cors';
 
 const app = express();
 const PORT = 3000;
@@ -24,6 +25,7 @@ const upload = multer({
   dest : 'public/images'
 });
 
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan('common'));
