@@ -51,7 +51,7 @@ app.delete('/heart/del', VerifyToken, DelHeart);
 
 app.get('/timeline', VerifyToken, GetTimeline);
 app.get('/profile', GetUser, GetFollows, GetTweets);
-app.get('/detail', GetTweets, GetReplys);
+app.get('/detail', GetTweets, GetReplys, GetHeart, GetRetweet);
 app.get('/message', VerifyToken);
 app.get('/search', GetTweets);
 
