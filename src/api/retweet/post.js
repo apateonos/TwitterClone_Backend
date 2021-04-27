@@ -1,5 +1,5 @@
 import { database } from '../../db/mysql';
-import { INSERT_RETWEET } from '../../db/query';
+import { INSERT_RETWEET, CHECK_RETWEET_DUP } from '../../db/query';
 
 export default async (req, res,next) => {
   try {

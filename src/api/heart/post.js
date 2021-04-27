@@ -1,5 +1,5 @@
 import { database } from '../../db/mysql';
-import { INSERT_HEART } from '../../db/query';
+import { INSERT_HEART, CHECK_HEART_DUP } from '../../db/query';
 
 export default async (req, res, next) => {
   try {

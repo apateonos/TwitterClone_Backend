@@ -14,7 +14,7 @@ export default async (req, res, next) => {
     }
 
     const value = [ user_name, user_image, profile, user_id ];
-    const [[ result ]] = await database.query(EDIT_USER_ACCOUNT, value);
+    const [ result ] = await database.query(EDIT_USER_ACCOUNT, value);
 
     res.data = { ...res.data, result };
     next();
