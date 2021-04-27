@@ -8,7 +8,7 @@ export default async (req, res, next) => {
 
     if (tweet_id) {
       const value = [ tweet_id ];
-      const [ tweets ] = await database.query(SELECT_TIMELINE, value);
+      const [ tweets ] = await database.query(SELECT_TWEET), value);
       res.data = { ...res.data, tweets };      
     } 
     if (unique_name) {
@@ -18,7 +18,7 @@ export default async (req, res, next) => {
     }
     if (user_id) {
       const value = [ user_id, user_id, user_id, user_id, user_id ];
-      const [ tweets ] = await database.query(SELECT_TWEET, value);
+      const [ tweets ] = await database.query(SELECT_TIMELINE, value);
       res.data = { ...res.data, tweets };  
     }
     
