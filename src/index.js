@@ -35,7 +35,7 @@ app.use(morgan('common'));
 app.use('/public/images', express.static('/public'));
 
 app.post('/refresh', VerifyRefresh, SignToken);
-app.post('/user/sign', upload.single('imageFile'), SignUser, LoginUser, GetFollows, SignToken, SignRefresh);
+app.post('/user/sign', upload.single('imageFile'), SignUser /*, LoginUser, GetFollows, SignToken, SignRefresh*/);
 app.post('/login', LoginUser, GetFollows, SignToken, SignRefresh);
 app.put('/user/edit', VerifyToken, upload.single('imageFile'), EditUser, GetUser);
 app.delete('/user/unsign', LoginUser, DelUser);
