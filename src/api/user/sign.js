@@ -4,8 +4,9 @@ import { INSERT_USER_ACCOUNT } from '../../db/query';
 
 export default async (req, res, next) => {
   try {
-    const { unique_name, user_name, password, profile } = req.body;
+    const { unique_name, user_name, password, profile=null } = req.body;
     let user_image = null;
+    
     if (req.files) {
       //tweet_image = req.files.filename;
       console.log(req.files);
@@ -29,7 +30,7 @@ export default async (req, res, next) => {
       const check = ban_list.some(word => word === char);
       if (check) throw {code: 'ER_INVAILD_USER_NAME', message: "Name can'not contain '<', '>', '.', ',', '='."};
     }
-
+    
     const hashed_password = await hash.pbkdf2Sync(password, process.env.HASH_SALT_KEY, 1024, 64, 'sha512').toString('hex');
     const value = [ unique_name, user_name, user_image, hashed_password, profile ];
     const [[ result ]] = await database.query(INSERT_USER_ACCOUNT, value);
