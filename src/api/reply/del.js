@@ -8,7 +8,7 @@ export default async (req, res, next) => {
     if (typeof reply_id !== 'number') throw {code: 'ER_INVAILD_TARGET', message: 'invaild request'};
 
     const value = [ user_id, reply_id ];
-    const [ result ] = database.query(DELETE_REPLY, value);
+    const [ result ] = await database.query(DELETE_REPLY, value);
 
     res.data = { ...res.data, result };
     next(); 

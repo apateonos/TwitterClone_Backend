@@ -6,8 +6,8 @@ export default async (req, res, next) => {
     const user_id = req.user_id;
     const value = [ user_id ];
     
-    const [ followers ] = database.query(SELECT_FOLLOWERS, value);
-    const [ followings ] = database.query(SELECT_FOLLOWINGS, value);
+    const [ followers ] = await database.query(SELECT_FOLLOWERS, value);
+    const [ followings ] = await database.query(SELECT_FOLLOWINGS, value);
 
     res.data = { ...res.data, followers, followings };
     next(); 

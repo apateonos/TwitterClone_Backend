@@ -7,7 +7,7 @@ export default async (req, res,next) => {
     const user_id = req.user_id;
     
     const value = [ user_id, tweet_id ];
-    const [ result ] = database.query(DELETE_RETWEETS, value);
+    const [ result ] = await database.query(DELETE_RETWEETS, value);
 
     res.data = { ...res.data, result };
     next();

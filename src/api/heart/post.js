@@ -8,7 +8,7 @@ export default async (req, res, next) => {
     if (typeof tweet_id !== 'number') throw {code: 'ER_INVAILD_TARGET', message: 'invaild request'};
 
     const value = [ user_id, tweet_id ];
-    const [ result ] = database.query(INSERT_HEART, value);
+    const [ result ] = await database.query(INSERT_HEART, value);
 
     res.data = { ...res.data, result };
     next(); 

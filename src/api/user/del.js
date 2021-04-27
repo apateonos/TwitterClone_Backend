@@ -14,7 +14,7 @@ export default async (req, res, next) => {
       });
     };
     
-    const [ images ] = database.query(SELECT_USER_TWEET_IMAGES, value);
+    const [ images ] = await database.query(SELECT_USER_TWEET_IMAGES, value);
     if (images.length > 0) {
       for(const obj of images) {
         const filename = obj.tweet_image;

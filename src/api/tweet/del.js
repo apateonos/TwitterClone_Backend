@@ -7,7 +7,7 @@ export default async (req, res, next) => {
     const { tweet_id } = req.body;
     const user_id = req.user_id;
 
-    const [[ image ]] = database.query(SELECT_USER_TWEET_IMAGES, user_id);
+    const [[ image ]] = await database.query(SELECT_USER_TWEET_IMAGES, user_id);
     const tweet_image = image.tweet_image;
     if (tweet_image) {
       fs.unlink(tweet_image, (err) => {

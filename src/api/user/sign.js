@@ -5,6 +5,7 @@ import { INSERT_USER_ACCOUNT } from '../../db/query';
 export default async (req, res, next) => {
   try {
     const { unique_name, user_name, password, profile } = req.body;
+
     if (!(4 < unique_name.length && unique_name.length < 12)) 
       throw {code: 'ER_INVAILD_UNIQUE_NAME', message: 'ID must be at least 4 letters and no more than 12 letters.'};
     if (!(4 < user_name.length && user_name.length < 12)) 
@@ -29,7 +30,6 @@ export default async (req, res, next) => {
     const value = [ unique_name, user_name, user_image, hashed_password, profile ];
     const [[ result ]] = await database.query(INSERT_USER_ACCOUNT, value);
     if (result.statusCode !== 2) throw {code: 'ER_SIGN_ACCOUNT', message: 'request could not be completed.'};
-
     next();
   } catch(err) {
     next(err);

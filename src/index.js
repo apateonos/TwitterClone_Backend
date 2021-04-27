@@ -25,7 +25,10 @@ const upload = multer({
   dest : 'public/images'
 });
 
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true,
+}));
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan('common'));
@@ -33,12 +36,12 @@ app.use('/public/images', express.static('/public'));
 
 app.get('/ping', (req, res) => { res.send('pong')});
 app.post('/refresh', VerifyRefresh, SignToken);
-app.post('/user/sign', upload.single('user_image'), SignUser, LoginUser, GetFollows, SignToken, SignRefresh);
+app.post('/user/sign', upload.single('imageFile'), SignUser, LoginUser, GetFollows, SignToken, SignRefresh);
 app.post('/login', LoginUser, GetFollows, SignToken, SignRefresh);
-app.put('/user/edit', VerifyToken, upload.single('user_image'), EditUser, GetUser);
+app.put('/user/edit', VerifyToken, upload.single('imageFile'), EditUser, GetUser);
 app.delete('/user/unsign', LoginUser, DelUser);
 
-app.post('/tweet/post', VerifyToken, upload.single('tweet_image'), PostTweet, PostReply);
+app.post('/tweet/post', VerifyToken, upload.single('imageFile'), PostTweet, PostReply);
 app.post('/retweet/post', VerifyToken, PostRetweet);
 app.post('/heart/post', VerifyToken, PostHeart);
 
@@ -47,7 +50,7 @@ app.delete('/retweet/del', VerifyToken, DelRetweet);
 app.delete('/heart/del', VerifyToken, DelHeart);
 
 app.get('/timeline', VerifyToken, GetTimeline);
-app.get('/profile', GetUser, GetTweets);
+app.get('/profile', GetUser, GetFollows, GetTweets);
 app.get('/detail', GetTweets, GetReplys);
 app.get('/message', VerifyToken);
 app.get('/search', GetTweets);
