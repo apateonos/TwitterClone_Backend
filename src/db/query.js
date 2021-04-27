@@ -20,14 +20,16 @@ export const INSERT_REPLY = 'INSERT INTO replys ( tweet_id, reply_id ) VALUES ( 
 export const DELETE_REPLY = 'DELETE FROM replys WHERE tweet_id = ? AND reply_id = ?;';
 
 //retweet api
+export const SELECT_TWEET_HEARTS = 'SELECT rt.*, u.user_image, u.user_name, u.unique_name FROM retweets rt LEFT JOIN users u ON u.user_id = rt.user_id WHERE rt.tweet_id = ?;';
 export const CHECK_RETWEET_DUP = 'SELECT * FROM retweets WHERE user_id = ? AND tweet_id = ?;';
-export const SELECT_RETWEETS = 'SELECT rt.tweet_id, u.user_image, u.user_name, u.unique_name FROM retweets rt LEFT JOIN users u ON u.user_id = rt.user_id WHERE rt.user_id = ?;';
+export const SELECT_USER_RETWEETS = 'SELECT rt.tweet_id, u.user_image, u.user_name, u.unique_name FROM retweets rt LEFT JOIN users u ON u.user_id = rt.user_id WHERE rt.user_id = ?;';
 export const INSERT_RETWEET = 'INSERT INTO retweets ( user_id, tweet_id ) VALUES ( ?, ? );';
 export const DELETE_RETWEET = 'DELETE FROM retweets WHERE user_id = ? AND tweet_id = ?;';
 
 //heart api
+export const SELECT_TWEET_HEARTS = 'SELECT h.*, u.user_image, u.user_name, u.unique_name FROM hearts h LEFT JOIN users u ON u.user_id = h.user_id WHERE h.tweet_id = ?;';
 export const CHECK_HEART_DUP = 'SELECT * FROM hearts WHERE user_id =? AND tweet_id = ?;';
-export const SELECT_HEARTS = 'SELECT h.tweet_id, u.user_image, u.user_name, u.unique_name FROM hearts h LEFT JOIN users u ON u.user_id = h.user_id WHERE h.user_id = ?;';
+export const SELECT_USER_HEARTS = 'SELECT h.*, u.user_image, u.user_name, u.unique_name FROM hearts h LEFT JOIN users u ON u.user_id = h.user_id WHERE h.user_id = ?;';
 export const INSERT_HEARTS = 'INSERT INTO hearts ( user_id, tweet_id ) VALUES ( ?, ? );';
 export const DELETE_HEARTS = 'DELETE FROM hearts WHERE user_id = ? AND tweet_id = ?;';
 

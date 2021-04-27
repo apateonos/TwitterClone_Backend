@@ -4,7 +4,8 @@ import { INSERT_PREPLY } from '../../db/query';
 export default async (req, res, next) => {
   try {
     const { reply_id } = req.body;
-    if (reply_id && typeof reply_id === 'number') {
+
+    if (reply_id) {
       const tweet_id = req.tweet_id;
       const user_id = req.user_id;
 
