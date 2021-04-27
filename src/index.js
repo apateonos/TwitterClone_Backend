@@ -7,8 +7,8 @@ import { GetUser, SignUser, LoginUser, DelUser, EditUser } from './api/user/inde
 import { GetFollows, PostFollow, DelFollow } from './api/follow/index';
 import { GetTweets, PostTweet, DelTweet } from './api/tweet/index';
 import { GetReplys, PostReply, DelReply } from './api/reply/index';
-import { GetRetweets, PostRetweet, DelRetweet } from './api/retweet/index';
-import { GetHearts, PostHeart, DelHeart } from './api/heart/index';
+import { GetRetweet, PostRetweet, DelRetweet } from './api/retweet/index';
+import { GetHeart, PostHeart, DelHeart } from './api/heart/index';
 import { GetTimeline } from './api/timeline/index';
 import { SocketAuthorization, SocketLogin, CreateRoom, LeaveRoom, SendMessage } from './socket/index';
 import morgan from 'morgan';
@@ -35,8 +35,8 @@ app.use(morgan('common'));
 app.use('/public/images', express.static('/public'));
 
 app.post('/refresh', VerifyRefresh, SignToken);
-app.post('/user/sign', upload.single('imageFile'), SignUser, LoginUser, GetFollows, GetRetweets, GetHearts, SignToken, SignRefresh);
-app.post('/login', LoginUser, GetFollows, GetRetweets, GetHearts, SignToken, SignRefresh);
+app.post('/user/sign', upload.single('imageFile'), SignUser, LoginUser, GetRetweet, GetHeart, GetFollows, SignToken, SignRefresh);
+app.post('/login', LoginUser, GetFollows, GetRetweet, GetHeart, SignToken, SignRefresh);
 app.put('/user/edit', VerifyToken, upload.single('imageFile'), EditUser, GetUser);
 app.delete('/user/unsign', LoginUser, DelUser);
 
