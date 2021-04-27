@@ -17,14 +17,13 @@ export default async (req, res, next) => {
     if (!(4 < password.length)) 
       throw {code: 'ER_INVAILD_PASSWORD', message: 'Password must be at least 4 characters long.'};
 
-    const user_image = req.files;
     const ban_list = ['<', '>', '.', ',', '='];
-    for(let i = 0; i < unique_name.length; i++) {
+    for (let i = 0; i < unique_name.length; i++) {
       const char = unique_name[i];
       const check = ban_list.some(word => word === char);
       if (check) throw {code: 'ER_INVAILD_UNIQUE_NAME', message: "ID can'not contain '<', '>', '.', ',', '='."};
     }
-    for(let i = 0; i < user_name.length; i++) {
+    for (let i = 0; i < user_name.length; i++) {
       const char = user_name[i];
       const check = ban_list.some(word => word === char);
       if (check) throw {code: 'ER_INVAILD_USER_NAME', message: "Name can'not contain '<', '>', '.', ',', '='."};
