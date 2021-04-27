@@ -8,6 +8,8 @@ export default async (req, res, next) => {
     if (typeof tweet_id !== 'number') throw {code: 'ER_INVAILD_TARGET', message: 'invaild request'};
 
     const value = [ user_id, tweet_id ];
+    const [ checkDup ] = await database.query(CHECK_HEART_DUP, value);
+    if (checkDup.length > 0) throw {code: 'ER_DUP_HEART', message: 'dupicated heart'};
     const [ result ] = await database.query(INSERT_HEART, value);
 
     res.data = { ...res.data, result };

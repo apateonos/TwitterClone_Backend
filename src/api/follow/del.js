@@ -9,9 +9,9 @@ export default async (req, res, next) => {
         
     const value = [ user_id, following_id ];
     await database.query(DELETE_FOLLOW, value);
-    const [ follows ] = await database.query(SELECT_FOLLOWINGS, value);
+    const [ followings ] = await database.query(SELECT_FOLLOWINGS, value);
 
-    res.data = { ...res.data, follows };
+    res.data = { ...res.data, followings };
     next(); 
   } catch (err) {
     next(err);
