@@ -4,7 +4,7 @@ import { SELECT_USER_HEARTS, SELECT_TWEET_HEARTS } from '../../db/query';
 export default async (req, res, next) => {
   try {
     const user_id = req.user_id;
-    const { tweet_id } = req.params;
+    const { tweet_id } = req.query;
 
     if (user_id) {
       const value = [ user_id ];
