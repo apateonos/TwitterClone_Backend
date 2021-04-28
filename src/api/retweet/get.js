@@ -1,5 +1,5 @@
 import { database } from '../../db/mysql';
-import { SELECT_USER_RETWEETS, SELECT_TWEET_HEARTS } from '../../db/query';
+import { SELECT_USER_RETWEETS, SELECT_TWEET_RETWEETS } from '../../db/query';
 
 export default async (req, res, next) => {
   try {
@@ -16,7 +16,7 @@ export default async (req, res, next) => {
     else if (tweet_id) {
       const value = [ tweet_id ];
       console.log(tweet_id);
-      const [ retweets ] = await database.query(SELECT_TWEET_HEARTS, value); 
+      const [ retweets ] = await database.query(SELECT_TWEET_RETWEETS, value); 
       console.log(retweets);
       res.data = { ...res.data, retweets };
     }
