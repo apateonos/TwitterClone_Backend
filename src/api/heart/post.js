@@ -1,5 +1,5 @@
 import { database } from '../../db/mysql';
-import { INSERT_HEARTS, CHECK_HEART_DUP } from '../../db/query';
+import { INSERT_HEART, CHECK_HEART_DUP } from '../../db/query';
 
 export default async (req, res, next) => {
   try {
@@ -9,7 +9,7 @@ export default async (req, res, next) => {
 
     const [ check ] = await database.query(CHECK_HEART_DUP, value);
     if (check.length > 0) throw {code: 'ER_DUP_HEART', message: 'dupicated heart'};
-    const [ result ] = await database.query(INSERT_HEARTS, value);
+    const [ result ] = await database.query(INSERT_HEART, value);
 
     res.data = { ...res.data, result };
     next(); 
