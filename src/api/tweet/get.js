@@ -5,7 +5,7 @@ export default async (req, res, next) => {
   try {
     const { tweet_id, unique_name } = req.query;
     const user_id = req.user_id;
-
+    console.log(user_id);
     if (tweet_id) {
       const value = [ tweet_id ];
       const [[ tweets ]] = await database.query(SELECT_TWEET, value);
