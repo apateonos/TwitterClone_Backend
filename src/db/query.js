@@ -15,7 +15,7 @@ export const INSERT_TWEET = 'INSERT INTO tweets ( user_id, tweet_text, tweet_ima
 export const DELETE_TWEET = 'DELETE FROM tweets WHERE user_id = ? AND tweet_id = ?;';
 
 //reply api
-export const SELECT_TWEET_REPLYS = 'SELECT t.*, u.user_image, u.user_name, u.unique_name FROM tweets t LEFT JOIN users u ON u.user_id = t.user_id LEFT JOIN replys r ON t.tweet_id = r.tweet_id WHERE r.reply_id = ?;';
+export const SELECT_TWEET_REPLYS = 'SELECT t.*, u.user_image, u.user_name, u.unique_name FROM replys r LEFT JOIN tweets t ON r.tweet_id = t.tweet_id LEFT JOIN users u ON u.user_id = t.user_id WHERE r.reply_id = ?;';
 export const INSERT_REPLY = 'INSERT INTO replys ( tweet_id, reply_id ) VALUES ( ?, ? );';
 export const DELETE_REPLY = 'DELETE FROM replys WHERE tweet_id = ? AND reply_id = ?;';
 
