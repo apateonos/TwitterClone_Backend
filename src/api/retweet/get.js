@@ -6,18 +6,14 @@ export default async (req, res, next) => {
     const user_id = req.user_id;
     const { tweet_id } = req.query;
 
-    console.log(user_id, tweet_id);
     if (user_id) {
       const value = [ user_id ];
-      console.log('siqblq');
       const [ retweets ] = await database.query(SELECT_USER_RETWEETS, value); 
       res.data = { ...res.data, retweets };
     }
     else if (tweet_id) {
       const value = [ tweet_id ];
-      console.log(tweet_id);
       const [ retweets ] = await database.query(SELECT_TWEET_RETWEETS, value); 
-      console.log(retweets);
       res.data = { ...res.data, retweets };
     }
    
