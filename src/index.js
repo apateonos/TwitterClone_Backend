@@ -29,6 +29,7 @@ app.use(cors({
   origin: true,
   credentials: true,
 }));
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan('common'));
@@ -66,7 +67,8 @@ app.use((err, req, res, next) => {
   res.status(400).send({code: err.code, message: err.message});
 });
 
-const io = socketIO(server);
+const socketCORS = { cors: { origin: true, credentials: true }};
+const io = socketIO(server, socketCORS);
 
 io.use(SocketAuthorization);
 
