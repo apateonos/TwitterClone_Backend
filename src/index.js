@@ -67,7 +67,7 @@ app.use((err, req, res, next) => {
   res.status(400).send({code: err.code, message: err.message});
 });
 
-const socketCORS = { cors: { origin: true, credentials: true }};
+const socketCORS = { cors: { origin: '*', credentials: true }};
 const io = socketIO(server, socketCORS);
 
 io.use(console.log('hello!'))//SocketAuthorization);
