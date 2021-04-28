@@ -30,8 +30,8 @@ export const DELETE_RETWEET = 'DELETE FROM retweets WHERE user_id = ? AND tweet_
 export const SELECT_TWEET_HEARTS = 'SELECT h.*, u.user_image, u.user_name, u.unique_name FROM hearts h LEFT JOIN users u ON u.user_id = h.user_id WHERE h.tweet_id = ?;';
 export const CHECK_HEART_DUP = 'SELECT * FROM hearts WHERE user_id = ? AND tweet_id = ?;';
 export const SELECT_USER_HEARTS = 'SELECT h.*, u.user_image, u.user_name, u.unique_name FROM hearts h LEFT JOIN users u ON u.user_id = h.user_id WHERE h.user_id = ?;';
-export const INSERT_HEARTS = 'INSERT INTO hearts ( user_id, tweet_id ) VALUES ( ?, ? );';
-export const DELETE_HEARTS = 'DELETE FROM hearts WHERE user_id = ? AND tweet_id = ?;';
+export const INSERT_HEART = 'INSERT INTO hearts ( user_id, tweet_id ) VALUES ( ?, ? );';
+export const DELETE_HEART = 'DELETE FROM hearts WHERE user_id = ? AND tweet_id = ?;';
 
 //
 export const CHECK_FOLLOW_DUP = 'SELECT * FROM follows WHERE user_id = ? AND following_id = ?;';

@@ -1,5 +1,5 @@
 import { database } from '../../db/mysql';
-import { DELETE_RETWEETS, SELECT_RETWEETS } from '../../db/query';
+import { DELETE_RETWEET } from '../../db/query';
 
 export default async (req, res,next) => {
   try {
@@ -7,10 +7,9 @@ export default async (req, res,next) => {
     const user_id = req.user_id;
     
     const value = [ user_id, tweet_id ];
-    await database.query(DELETE_RETWEETS, value);
-    const [ retweets ] = await database.query(SELECT_RETWEETS, user_id);
+    const [ result ] = await database.query(DELETE_RETWEET, value);
 
-    res.data = { ...res.data, retweets };
+    res.data = { ...res.data, result };
     next();
   } catch (err) {
     next(err);
