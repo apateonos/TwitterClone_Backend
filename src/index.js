@@ -55,8 +55,8 @@ app.get('/detail', GetTweets, GetReplys, GetHeart, GetRetweet);
 app.get('/message', VerifyToken);
 app.get('/search', GetTweets);
 
-app.post('/follow/post', VerifyToken, PostFollow);
-app.delete('/follow/del', VerifyToken, DelFollow);
+app.post('/follow/post', VerifyToken, PostFollow, GetFollows);
+app.delete('/follow/del', VerifyToken, DelFollow, GetFollows);
 
 app.use((req, res) => {
   res.json(res.data);
