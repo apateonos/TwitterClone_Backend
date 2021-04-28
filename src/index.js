@@ -70,7 +70,7 @@ app.use((err, req, res, next) => {
 const socketCORS = { cors: { origin: true, credentials: true }};
 const io = socketIO(server, socketCORS);
 
-io.use(SocketAuthorization);
+io.use(console.log('hello!'))//SocketAuthorization);
 
 io.on('connection', socket => {
   socket.leave(socket.id);
