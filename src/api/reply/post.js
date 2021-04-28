@@ -7,7 +7,7 @@ export default async (req, res, next) => {
 
     if (reply_id) {
       const tweet_id = req.tweet_id;
-
+      console.log(tweet_id, reply_id);
       const value = [ tweet_id, reply_id ];
       const [ result ] = await database.query(INSERT_REPLY, value);
 
