@@ -42,8 +42,8 @@ app.put('/user/edit', VerifyToken, upload.single('imageFile'), EditUser, GetUser
 app.delete('/user/unsign', LoginUser, DelUser);
 
 app.post('/tweet/post', VerifyToken, upload.single('imageFile'), PostTweet, PostReply);
-app.post('/retweet/post', VerifyToken, PostRetweet);
-app.post('/heart/post', VerifyToken, PostHeart);
+app.post('/retweet/post', VerifyToken, PostRetweet, GetRetweet);
+app.post('/heart/post', VerifyToken, PostHeart, GetHeart);
 
 app.delete('/tweet/del', VerifyToken, DelTweet, DelReply);
 app.delete('/retweet/del', VerifyToken, DelRetweet);

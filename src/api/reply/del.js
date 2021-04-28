@@ -9,7 +9,7 @@ export default async (req, res, next) => {
 
     const value = [ user_id, reply_id ];
     const [ result ] = await database.query(DELETE_REPLY, value);
-
+    
     res.data = { ...res.data, result };
     next(); 
   } catch (err) {

@@ -1,5 +1,5 @@
 import { database } from '../../db/mysql';
-import { INSERT_FOLLOW, CHECK_FOLLOW_DUP, SELECT_FOLLOWINGS } from '../../db/query';
+import { INSERT_FOLLOW, CHECK_FOLLOW_DUP } from '../../db/query';
 
 export default async (req, res, next) => {
   try {
@@ -10,10 +10,9 @@ export default async (req, res, next) => {
     const value = [ user_id, following_id ];
     const [ check ] = await database.query(CHECK_FOLLOW_DUP, value);
     if (check.length > 0) throw {code: 'ER_DUP_FOLLOW', message: 'dupicated follower'};
-    await database.query(INSERT_FOLLOW, value);
-    const [ followings ] = await database.query(SELECT_FOLLOWINGS, user_id);
+    const [ result ] = await database.query(INSERT_FOLLOW, value);
 
-    res.data = { ...res.data, followings };
+    res.data = { ...res.data, result };
     next(); 
   } catch (err) {
     next(err);
