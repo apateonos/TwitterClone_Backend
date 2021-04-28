@@ -4,7 +4,7 @@ import { SELECT_TWEET_REPLYS } from '../../db/query';
 export default async (req, res, next) => {
   try {
     const { tweet_id } = req.query;
-    console.log('>>>>>' tweet_id);
+    console.log('>>>>>', tweet_id);
     const value = [ tweet_id ];
     console.log(value, SELECT_TWEET_REPLYS);
     const [ replys ] = await database.query(SELECT_TWEET_REPLYS, value);
