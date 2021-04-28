@@ -66,16 +66,16 @@ app.use((err, req, res, next) => {
   res.status(400).send({code: err.code, message: err.message});
 });
 
-const io = socketIO(server);/* 
+const io = socketIO(server);
 
 io.use(SocketAuthorization);
 
 io.on('connection', socket => {
-  socket.leave(socket.id); //초기 개인룸 삭제
-  socket.join(socket.user_id); //고유 아이디로 재접속
+  socket.leave(socket.id);
+  socket.join(socket.user_id);
 
   socket.on('login', () => SocketLogin(socket));
   socket.on('create room', (req, res) => CreateRoom(socket, req, res));
   socket.on('send message', (req, res) => SendMessage(socket, req, res));
   socket.on('leave room', (req, res) => LeaveRoom(socket, req, res));
-}); */
+});

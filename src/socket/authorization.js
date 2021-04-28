@@ -9,6 +9,8 @@ export default async (socket, next, res) => {
     const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);
     const { id, type } = decoded;
 
+    console.log('socket auth',id, type);
+
     socket.user_id = id;
     const [ room_list ] = await database.query('SELECT * FROM rooms WHERE user_id = ?;', id);
     socket.room_list = room_list;

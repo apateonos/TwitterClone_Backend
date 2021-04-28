@@ -2,7 +2,7 @@ import { database } from '../db/mysql';
 import { SELECT_PARTICIPATED_ROOMS } from '../db/query';
 
 export default async (socket) => {
-  try {
+/*  try {
     const user_id = socket.user_id;
     
     const value = [ user_id ];
@@ -16,5 +16,5 @@ export default async (socket) => {
     }
   } catch (err) {
 
-  }
+  }*/
 }

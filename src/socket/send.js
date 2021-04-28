@@ -1,7 +1,7 @@
 import { database } from "../db/mysql";
 
 export default async (socket, req, res) => {
-  try {
+/*  try {
     const { room_id, room_name, message } = req;
     const user_id = socket.user_id;
  
@@ -10,5 +10,5 @@ export default async (socket, req, res) => {
     await database.query(INSERT_MESSAGE, value);
   } catch (err) {
 
-  }
+  }*/
 }

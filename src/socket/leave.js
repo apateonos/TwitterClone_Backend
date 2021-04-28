@@ -2,7 +2,7 @@ import { database } from "../db/mysql";
 import { LEAVE_ROOM, SELECT_REMAINING_PEOPLE, DELETE_MESSAGE, DELETE_ROOM } from '../db/query';
 
 export default async (socket, req, res) => {
-  try {
+/*  try {
     const user_id = socket.user_id;
     const { room_id } = req;
 
@@ -17,5 +17,5 @@ export default async (socket, req, res) => {
     }
   } catch (err) {
 
-  }
+  }*/
 }
