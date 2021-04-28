@@ -17,7 +17,7 @@ export default async (req, res, next) => {
     const [ result ] = await database.query(INSERT_TWEET, value);
 
     req.tweet_id = result.insertId;
-    res.data = { ...data, result };
+    res.data = { ...res.data, result };
     next();
   } catch (err) {
     next(err);
